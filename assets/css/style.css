@@ -1,0 +1,25 @@
+.breadcrumb.breadcrumb-arrow>li+li:before {
+	content: ">";
+}
+
+.list-group-item.no-mouse-events {
+	pointer-events: none;
+	background-color: #4caf50;
+	color:#fff;
+}
+
+hr.hr-blue {
+	border-top: 1px solid #2196F3;
+}
+
+.list-group-item {
+    background-color: #eeeeee;
+    color: #999999;
+    cursor: pointer;
+}
+
+.popover-comments .popover {
+  position: relative;
+  display: block;
+  margin: 20px;
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+<head>
+  <title>AngularJS Practical Test</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="assets/lib/css/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/lib/css/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body ng-controller="appController">
+  <ul class="breadcrumb breadcrumb-arrow">
+    <li class="active"><i class="fa fa-building-o"></i> ACME LTD.</li>
+    <li class="active">MATTERS</li>
+    <li class="active">Data</li>
+  </ul>
+  <div class="container">
+    <div class="col-md-12 alert alert-danger">Note : Once you clicked checkbox that task will be marked as completed and css class 'no-mouse-events'  is added to it.</div>
+    <div class="col-md-6">
+      <div class="list-group">
+        <div href="#" class="list-group-item {{task.is_completed ? 'no-mouse-events' : ''}}" ng-repeat="task in tasks" ng-click="display_comments(task,$index)">
+          <input type="checkbox" class="{{task.is_completed ? 'no-mouse-events' : ''}}" ng-model="task.is_completed"> {{task.name}}
+        </div>
+      </div>
+      <hr class="hr-blue">
+      <div class="row">
+        <div class="col-md-12"><button type="button" class="btn btn-default pull-right" ng-click="show_add_task()">Add Task</button></div>
+        <div class="col-md-12" ng-if="show_add_task_form">
+          <div class="form-group">
+            <label for="new_task">Add Task</label>
+            <input type="text" class="form-control" placeholder="New Task" ng-model="new_task" ng-enter="add_task()">
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn btn-default pull-right" ng-click="add_task()">Create Task</button>
+          </div>
+        </div>
+        <br><br>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="col-md-6">
+      <div class="col-md-12" ng-if="comments.length==0 && tasks[task_index].is_completed == false">No Comments to display</div>
+      <div class="col-md-12" ng-if="tasks[task_index].is_completed==true">Task Completed !</div>
+      <div class="col-md-12" ng-if="comments.length>0">
+        <div class="popover-comments" ng-repeat="comment in comments | orderBy:'time':true">
+          <div class="popover right">
+            <div class="arrow"></div>
+            <div class="popover-title">
+            {{comment.time | date:'yyyy-MM-dd HH:mm a'}}
+            </div>
+            <div class="popover-content">
+              <p></p>
+              {{comment.comment}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12" ng-if="tasks[task_index].is_completed==false">
+        <div class="form-group">
+          <label for="new_comment">Add Comments</label>
+          <input type="text" class="form-control" placeholder="New Comment" ng-model="new_comment" ng-enter="add_comment()">
+        </div>
+        <div class="form-group">
+          <button type="button" class="btn btn-default pull-right" ng-click="add_comment()">Comment</button>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <script src="assets/lib/js/jquery.min.js"></script>
+  <script src="assets/lib/js/bootstrap.min.js"></script>
+  <script src="assets/lib/js/angularjs/angular.min.js"></script>
+  <script src="assets/js/custom.js"></script>
+</body>
+</html>
